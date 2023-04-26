@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.*;
 
 import com.example.demo.domain.*;
 import com.example.demo.mapper.*;
@@ -65,9 +66,30 @@ public class BoardController {
 
 	//@RequestMapping(value="/modify/{id}", method=RequestMethod.POST)
 	@PostMapping("/modify/{id}")
-	public String modifyProcess(Board board) {
+	public String modifyProcess(Board board, RedirectAttributes rttr) {
 
-		service.modify(board);
-		 return null;
+		boolean ok = service.modify(board);
+		
+		if(ok) {
+			// 해당 게시물 보기로 리디렉션
+			// RedirectAttributes를 사용하면 쿼리스트링에 붙어서 넘어감
+			rttr.addAttribute("success", "success");
+			return "redirect:/id/" + board.getId();
+		}else {
+			// 수정form으로 리디렉션
+			rttr.addAttribute("fail", "fail");
+			return "redirect:/modify/" + board.getId();
+		}
+	}
+	
+	@PostMapping("remove")
+	public String remove(@RequestParam Integer id, RedirectAttributes rttr) {
+		boolean ok = service.remove(id);
+		if(ok) {
+			rttr.addAttribute("success", "remove");
+			return "redirect:/list";
+		} else {
+			return "redirect:/id/" + id;
+		}
 	}
 }
