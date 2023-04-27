@@ -134,7 +134,8 @@ public class BoardController {
 			// 문제가 발생한 경우에는 다시 입력창으로 돌아가도록!
 			return "redirect:/add";
 		}
-		// 4.
+		// 4.ㅁㄴㅇ럼ㄴㅇㄹ
+		ok
 	}
 	
 
