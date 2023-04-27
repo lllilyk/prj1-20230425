@@ -38,4 +38,13 @@ public class BoardService {
 		int cnt = mapper.deleteById(id);
 		return cnt == 1;
 	}
+
+	public boolean addBoard(Board board) {
+		int cnt = mapper.insert(board);
+		// 일부러 fail 상황을 만들기 위해 작성한 코드
+		//int cnt = 0;
+		return cnt == 1;
+	}
+
+	
 }

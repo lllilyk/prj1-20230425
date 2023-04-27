@@ -73,11 +73,15 @@ public class BoardController {
 		if(ok) {
 			// 해당 게시물 보기로 리디렉션
 			// RedirectAttributes를 사용하면 쿼리스트링에 붙어서 넘어감
-			rttr.addAttribute("success", "success");
+			//rttr.addAttribute("success", "success");
+			
+			rttr.addFlashAttribute("message", board.getId() + "번 게시물이 수정되었습니다.");
 			return "redirect:/id/" + board.getId();
 		}else {
 			// 수정form으로 리디렉션
-			rttr.addAttribute("fail", "fail");
+			//rttr.addAttribute("fail", "fail");
+			
+			rttr.addFlashAttribute("message", board.getId()+"번 게시물이 수정되지 않았습니다.");
 			return "redirect:/modify/" + board.getId();
 		}
 	}
@@ -86,10 +90,52 @@ public class BoardController {
 	public String remove(@RequestParam Integer id, RedirectAttributes rttr) {
 		boolean ok = service.remove(id);
 		if(ok) {
-			rttr.addAttribute("success", "remove");
+			//addAttribute로 쿼리 스트링에 붙도록 했는데 이렇게 하면 
+			//새로고침할 때 같은 "삭제되었습니다" 알림창이 계속 뜸
+			//rttr.addAttribute("success", "remove");
+			
+			//그래서 변경 > 모델에 추가
+			//삭제 후 list.jsp에서 20번째 코드에 의해서 list목록에서 확인가능
+			rttr.addFlashAttribute("message", id + "번 게시물이 삭제되었습니다.");
 			return "redirect:/list";
 		} else {
 			return "redirect:/id/" + id;
 		}
 	}
+	
+	@GetMapping("add")
+	public void addForm() {
+		//게시물 작성 form(view)로 포워드
+		
+	}
+	
+	@PostMapping("add")
+	public String addProcess(Board board, RedirectAttributes rttr) {
+		// 새 게시물 db에 추가
+		// 1. 
+		// 2.
+		boolean ok = service.addBoard(board);
+		// 3.
+		if(ok) {
+			rttr.addFlashAttribute("message", board.getId() + "번 게시물이 등록되었습니다.");
+			return "redirect:/id/" + board.getId();
+			// Auto_Increment 설정때문에 삭제해도 Id값은 계속 1씩 증가
+			// 만약 모르는 여러 사람이 여러 게시글을 작성한다고 할 때,
+			// 동일한 게시물을 동일한 이름으로 작성하면
+			// 누가 몇 번째 id의 게시물을 작성했는지 알수가 없음
+			// 따라서 Controller에 이렇게 작성하고 끝내버리면
+			// Controller에게 요청을 받아서 일해야 하는 Mapper는 
+			// Id값을 모르니까 null오류가 발생
+			// BoardMapper.jsp에서 @Options어노테이션을 사용해서 
+			// 자동증가하는 키값을 사용하겠다고 설정해주기!
+		} else {
+			rttr.addFlashAttribute("message", "게시물 등록 중 문제가 발생하였습니다.");
+			rttr.addFlashAttribute("board", board);
+			// 문제가 발생한 경우에는 다시 입력창으로 돌아가도록!
+			return "redirect:/add";
+		}
+		// 4.
+	}
+	
+
 }
