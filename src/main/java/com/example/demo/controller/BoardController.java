@@ -44,12 +44,14 @@ public class BoardController {
 		
 		//아래의 코드는 @RequestParam에 defaultValue를 추가함으로써 필요없어짐
 		//<Board> list = service.listBoard(); //page 처리 전
-		List<Board> list = service.listBoard(page); //page처리 후
+		Map<String, Object> result = service.listBoard(page); //page처리 후
 		
 		//3. add attribute
-		model.addAttribute("boardList", list);
+		//model.addAttribute("boardList", result.get("boardList"));
+		//model.addAttribute("pageInfo", result.get("pageInfo"));
+		//위 두 줄의 코드 대신 아래의 코드를 작성
+		model.addAllAttributes(result);
 		
-		System.out.println(list.size());
 		//4. forward / redirect
 		return "list"; // 경로 1, 2둘 다 가능한데 명시적으로 list를 경로로 사용하도록
 	}

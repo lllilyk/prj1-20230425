@@ -16,7 +16,9 @@
 <nav class="navbar navbar-expand-lg bg-dark mb-3" data-bs-theme="dark">
 	<!--  <div class="container-fluid"> navbar가 적당한 위치에 오도록 아래와 같이 수정-->
 	<div class="container-lg">
-		<a class="navbar-brand" href="/list">My Board</a>
+		<a class="navbar-brand" href="/list">
+			<img src="/img/spring-logo.png" alt="" height="30"> board</img>
+		</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -45,7 +47,9 @@
 			<form class="d-flex" role="search">
 				<input class="form-control me-2" type="search" placeholder="Search"
 					aria-label="Search">
-				<button class="btn btn-outline-success" type="submit">Search</button>
+				<button class="btn btn-outline-success" type="submit">
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</button>
 			</form>
 		</div>
 	</div>
