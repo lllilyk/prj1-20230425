@@ -85,6 +85,7 @@
 		});
 	</script>
 	<!-- success라는 파라미터가 있으면 alert창이 뜨도록 -->
+	<!--
 	<c:if test="${not empty param.success}">
 		<script>
 			alert("게시물이 수정되었습니다.");

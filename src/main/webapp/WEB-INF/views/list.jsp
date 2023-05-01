@@ -50,49 +50,32 @@
 				<ul class="pagination justify-content-center">
 				
 				<!-- 이전 버튼 -->
-				
-				<!-- currentPageNum이 1이 아닐때 '이전' 버튼을 보여줘라 
-				<c:if test="${pageInfo.currentPageNum ne 1 }" /> -->
-				
-				<!-- currentPageNum이 1보다 클 때 '이전' 버튼을 보여줘라  -->
-				<c:if test="${pageInfo.currentPageNum gt 1 }">
-					<c:url value="/list" var="pageLink">
-						<c:param name="page" value="${pageInfo.currentPageNum - 1 }"/>
-					</c:url>			
-					<li class="page-item">
-						<a class="page-link" href="${pageLink }">
+					<c:if test="${pageInfo.currentPageNum gt 1 }">
+						<my:pageItem pageNum="${pageInfo.currentPageNum - 1 }">
 							<i class="fa-solid fa-angle-left"></i>
-						</a>
-					</li>
-				</c:if>
-				
-				<!-- 계속 설정이 반복될 수 있도록 c:foreach -->
-				<c:forEach begin="${pageInfo.leftPageNum }" end="${pageInfo.rightPageNum }" var="pageNum">	
-					<c:url value="/list" var="pageLink">
-						<c:param name="page" value="${pageNum }"/>
-					</c:url>			
-					<li class="page-item">
-						<!-- 현재 페이지 active표시 -->
-						<a class="page-link ${pageNum eq pageInfo.currentPageNum ? 'active' : '' }" href="${pageLink }">${pageNum }</a>
-					</li>
-				</c:forEach>
-				
-				<!-- 다음 버튼 -->
-				<!-- currentPageNum이 lastPageNum보다 작을 때만 '다음' 버튼을 보여줘라 -->
-				<c:if test="${pageInfo.currentPageNum lt pageInfo.lastPageNum }">
-					<c:url value="/list" var="pageLink">
-						<c:param name="page" value="${pageInfo.currentPageNum + 1 }"/>
-					</c:url>			
-					<li class="page-item">
-						<a class="page-link" href="${pageLink }">
+						</my:pageItem>
+					</c:if>
+
+					<c:forEach begin="${pageInfo.leftPageNum }" end="${pageInfo.rightPageNum }" var="pageNum">
+						<my:pageItem pageNum="${pageNum }">
+							${pageNum }
+						</my:pageItem>
+					</c:forEach>
+
+					<!-- 다음 버튼 -->
+					<c:if test="${pageInfo.currentPageNum lt pageInfo.lastPageNum }">
+						<%-- 페이지 번호 : ${pageInfo.currentPageNum + 1 } --%>
+						<my:pageItem pageNum="${pageInfo.currentPageNum + 1 }">
 							<i class="fa-solid fa-angle-right"></i>
-						</a>
-					</li>
-				</c:if>
+						</my:pageItem>
+					
+					</c:if>
+
 				</ul>
 			</nav>
 		</div>
 	</div>
+
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

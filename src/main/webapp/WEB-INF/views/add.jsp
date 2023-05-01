@@ -26,10 +26,10 @@
 					</div>
 					<div class="mb-3">
 						<label for="bodyTextArea" class="form-label">본문</label>
-						<textarea rows="10" id="bodyTextArea" class="form-control" name="body" value="${board.body }"></textarea>
+						<textarea rows="10" id="bodyTextArea" class="form-control" name="body">${board.body }</textarea>
 					</div>
 					<div class="mb-3">
-						<label for="writerInput class="form-label">작성자</label>
+						<label for="writerInput" class="form-label">작성자</label>
 						<input id="writerInput" class="form-control" type="text" name="writer" value="${board.writer }" />
 					</div>
 					<div class="mb-3">

@@ -37,14 +37,16 @@ public class BoardController {
 	//그럼에도 불구하고 default value를 얻어 페이지를 잘 보여줄 수 있도록 
 	//@RequestParam 파라미터에 (value="page", defaultValue = "1")를 작성
 	public String list(Model model, 
-				@RequestParam(value="page", defaultValue = "1") Integer page) {
+				@RequestParam(value="page", defaultValue = "1") Integer page, 
+				@RequestParam(value = "search", defaultValue = "") String search,
+				@RequestParam(value = "type", required = false) String type) {
 		//1. request param 수집 / 가공
 		
 		//2. business logic 처리 : 게시물 목록 보여주기 (mapper가 일할 것임)
 		
 		//아래의 코드는 @RequestParam에 defaultValue를 추가함으로써 필요없어짐
 		//<Board> list = service.listBoard(); //page 처리 전
-		Map<String, Object> result = service.listBoard(page); //page처리 후
+		Map<String, Object> result = service.listBoard(page, search, type); //page처리 후
 		
 		//3. add attribute
 		//model.addAttribute("boardList", result.get("boardList"));
@@ -63,14 +65,12 @@ public class BoardController {
 		Board board = service.getBoard(id);
 		// 3. add attribute
 		model.addAttribute("board", board);
-		System.out.println(board);
 		// 4. forward / redirect
 		return "get";
 	}
 	
 	@GetMapping("/modify/{id}")
 	public String modifyForm(@PathVariable("id") Integer id, Model model) {
-		
 		model.addAttribute("board", service.getBoard(id));
 		return "modify";
 		

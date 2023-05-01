@@ -54,21 +54,55 @@ public interface BoardMapper {
 
 	
 	@Select("""
-			SELECT 
+			<script>
+			<bind name="pattern" value="'%' + search + '%'" />
+			SELECT
 				id,
 				title,
 				writer,
 				inserted
 			FROM Board
+			
+			<where>
+				<if test="(type eq 'all') or (type eq 'title')">
+				   title  LIKE #{pattern}
+				</if>
+				<if test="(type eq 'all') or (type eq 'body')">
+				OR body   LIKE #{pattern}
+				</if>
+				<if test="(type eq 'all') or (type eq 'writer')">
+				OR writer LIKE #{pattern}
+				</if>
+			</where>
+			
 			ORDER BY id DESC
-			LIMIT #{startIndex}, #{rowPerPage} 
+			LIMIT #{startIndex}, #{rowPerPage}
+			</script>
 			""")
-	List<Board> selectAllPaging(Integer startIndex, Integer rowPerPage);
+	List<Board> selectAllPaging(Integer startIndex, Integer rowPerPage, String search, String type);
 
 	@Select("""
-				SELECT COUNT(*)
-				FROM Board
+			<script>
+			<bind name="pattern" value="'%' + search + '%'" />
+			SELECT COUNT(*) 
+			FROM Board
+			
+			<where>
+				<if test="(type eq 'all') or (type eq 'title')">
+				   title  LIKE #{pattern}
+				</if>
+				<if test="(type eq 'all') or (type eq 'body')">
+				OR body   LIKE #{pattern}
+				</if>
+				<if test="(type eq 'all') or (type eq 'writer')">
+				OR writer LIKE #{pattern}
+				</if>
+			</where>
+			
+			</script>
 			""")
-	Integer countAll();
+	Integer countAll(String search, String type);
+	
+
 	
 }
