@@ -46,5 +46,13 @@ public class BoardService {
 		return cnt == 1;
 	}
 
+	public List<Board> listBoard(Integer page) {
+		//20개씩 보여줄거면 * 20, 15개씩 보여줄거면 * 15
+		Integer startIndex = (page - 1) * 15;
+		// 게시물 목록
+		return mapper.selectAllPaging(startIndex);
+		
+		// 페이지네이션이 필요한 정보
 	
+	}
 }

@@ -27,15 +27,25 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
-	// 경로1 : http://localhost:8080
-	// 경로2 : http://localhost:8080/list
+	// 경로1 : http://localhost:8080?page=3
+	// 경로2 : http://localhost:8080/list?page=5
 	// 게시물 목록
 	// @RequestMapping(value = {"/", "list"}, method = RequestMethod.GET)
 	@GetMapping({"/", "list"})
-	public String list(Model model) {
+	//페이지 번호가 쿼리스트링으로 붙으니까 Integer page를 넣어주는데
+	//1페이지의 경우에는 queryString에 ?page=1이렇게 붙지 않으니까
+	//그럼에도 불구하고 default value를 얻어 페이지를 잘 보여줄 수 있도록 
+	//@RequestParam 파라미터에 (value="page", defaultValue = "1")를 작성
+	public String list(Model model, 
+				@RequestParam(value="page", defaultValue = "1") Integer page) {
 		//1. request param 수집 / 가공
+		
 		//2. business logic 처리 : 게시물 목록 보여주기 (mapper가 일할 것임)
-		List<Board> list = service.listBoard();
+		
+		//아래의 코드는 @RequestParam에 defaultValue를 추가함으로써 필요없어짐
+		//<Board> list = service.listBoard(); //page 처리 전
+		List<Board> list = service.listBoard(page); //page처리 후
+		
 		//3. add attribute
 		model.addAttribute("boardList", list);
 		
@@ -134,8 +144,7 @@ public class BoardController {
 			// 문제가 발생한 경우에는 다시 입력창으로 돌아가도록!
 			return "redirect:/add";
 		}
-		// 4.ㅁㄴㅇ럼ㄴㅇㄹ
-		ok
+		// 4.
 	}
 	
 
