@@ -27,7 +27,7 @@
 					
 					<!-- 그림 파일 출력 -->
 					<div class="mb-3">
-						<c:forEach items="${fileNameList }" var="fileName">
+						<c:forEach items="${board.fileName }" var="fileName">
 							<div>
 								<!-- localhost:8080/image/게시물번호/fileName -->
 								<!-- http://localhost:8080/image/412/%EB%AA%85%ED%97%8C.jpg -->

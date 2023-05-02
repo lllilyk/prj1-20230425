@@ -64,6 +64,7 @@ public class BoardController {
 		// 1. request param 
 		// 2. business logic : 서비스한테 일 시킴
 		Board board = service.getBoard(id);
+		System.out.println(board);
 		// 3. add attribute
 		model.addAttribute("board", board);
 		// 4. forward / redirect
