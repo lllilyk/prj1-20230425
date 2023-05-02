@@ -24,6 +24,18 @@
 						<label for="" class="form-label">제목</label>
 						<input type="text" class="form-control" value="${board.title }" readonly />
 					</div>
+					
+					<!-- 그림 파일 출력 -->
+					<div class="mb-3">
+						<c:forEach items="${fileNameList }" var="fileName">
+							<div>
+								<!-- localhost:8080/image/게시물번호/fileName -->
+								<!-- http://localhost:8080/image/412/%EB%AA%85%ED%97%8C.jpg -->
+								<img src="http://localhost:8080/image/${board.id }/${fileName}" alt="" />
+							</div>
+						</c:forEach>
+					</div>
+					
 					<div class="mb-3">
 						<label for="" class="form-label">본문</label>
 						<textarea class="form-control" readonly rows="10">${board.body }</textarea>

@@ -21,9 +21,14 @@ public interface BoardMapper {
 	List<Board> selectAll();
 
 	@Select("""
-			SELECT *
-			FROM Board
-			WHERE id = #{id}
+			SELECT b.id,
+				   b.title,
+				   b.body,
+				   b.inserted,
+				   b.writer,
+				   f.fileName
+			FROM Board b LEFT JOIN FileName f ON b.id = f.boardId
+			WHERE b.id = #{id}
 			""")
 	Board selectById(Integer id);
 
@@ -102,7 +107,15 @@ public interface BoardMapper {
 			</script>
 			""")
 	Integer countAll(String search, String type);
-	
 
+	// board 테이블에 file column을 추가하는 건 정규화에 어긋남 
+	// 여러 파일을 받을 수도 있는데 같은 id에 여러 컬럼값이 들어가게 되므로
+	// 따라서 MySQL에서 아예 FileName이라는 테이블을 새로 생성해주고
+	// 생성한 fileName 테이블에 전송받은 file들을 추가해줌으로써 정규화 규칙 준수!
+	@Insert("""
+			INSERT INTO FileName(boardId, fileName)
+			VALUES (#{boardId}, #{fileName})
+			""")
+	Integer insertFileName(Integer boardId, String fileName);
 	
 }
