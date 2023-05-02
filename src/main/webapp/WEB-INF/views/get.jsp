@@ -31,7 +31,7 @@
 							<div>
 								<!-- localhost:8080/image/게시물번호/fileName -->
 								<!-- http://localhost:8080/image/412/%EB%AA%85%ED%97%8C.jpg -->
-								<img src="http://localhost:8080/image/${board.id }/${fileName}" alt="" />
+								<img src="http://localhost:8080/image/${board.id }/${fileName}" class="img-thumbnail" class="img-fluid" alt="" />
 							</div>
 						</c:forEach>
 					</div>

@@ -34,6 +34,12 @@
 						<td>${board.id }</td>
 						<td>
 							<!-- path variable --> <a href="/id/${board.id }">${board.title }</a>
+							<c:if test="${board.fileCount > 0 }">
+								<span class="badge rounded-pill text-bg-dark">
+									<i class="fa-regular fa-images"></i>
+										${board.fileCount }
+								</span>
+							</c:if>
 						</td>
 						<td>${board.writer }</td>
 						<td>${board.inserted }</td>

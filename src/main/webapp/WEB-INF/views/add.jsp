@@ -19,24 +19,25 @@
 				<h1>게시물 작성</h1>
 				<form method="post" enctype="multipart/form-data">
 					<!-- id는 기본값, inserted는 현재시간이 들어가니까 필요없음 -->
-					<div class="mb-3" >
+					<div class="mb-3">
 						<!-- 한페이지에 한 element만 id값 하나 -->
 						<label for="titleInput" class="form-label">제목</label>
 						<input id="titleInput" class="form-control" type="text" name="title" value="${board.title }" />
 					</div>
 					<div class="mb-3">
-						<label for="bodyTextArea" class="form-label">본문</label>
-						<textarea rows="10" id="bodyTextArea" class="form-control" name="body">${board.body }</textarea>
+						<label for="bodyTextarea" class="form-label">본문</label>
+						<textarea rows="10" id="bodyTextarea" class="form-control" name="body">${board.body }</textarea>
 					</div>
 					<div class="mb-3">
 						<label for="writerInput" class="form-label">작성자</label>
 						<input id="writerInput" class="form-control" type="text" name="writer" value="${board.writer }" />
 					</div>
-					
-					 <div>
-					 	<input type="file" multiple name="files" accept="image/*"/>
-					 </div>
-					
+
+					<div class="mb-3">
+						<label for="fileInput" class="form-label">그림 파일</label>
+						<input class="form-control" type="file" id="fileInput" name="files" accept="image/*" multiple>
+					</div>
+
 					<div class="mb-3">
 						<input class="btn btn-primary" type="submit" value="등록" />
 					</div>
@@ -46,6 +47,5 @@
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	
 </body>
 </html>

@@ -4,29 +4,30 @@ import java.util.*;
 
 import org.apache.ibatis.annotations.*;
 
-import com.example.demo.controller.*;
 import com.example.demo.domain.*;
 
 @Mapper
 public interface BoardMapper {
 
 	@Select("""
-			SELECT id,
-				   title,
-				   writer,
-				   inserted
+			SELECT
+				id,
+				title,
+				writer,
+				inserted
 			FROM Board
 			ORDER BY id DESC
 			""")
 	List<Board> selectAll();
 
 	@Select("""
-			SELECT b.id,
-				   b.title,
-				   b.body,
-				   b.inserted,
-				   b.writer,
-				   f.fileName
+			SELECT 
+				b.id,
+				b.title,
+				b.body,
+				b.inserted,
+				b.writer,
+				f.fileName
 			FROM Board b LEFT JOIN FileName f ON b.id = f.boardId
 			WHERE b.id = #{id}
 			""")
@@ -35,39 +36,38 @@ public interface BoardMapper {
 
 	@Update("""
 			UPDATE Board
-			SET title = #{title},
+			SET 
+				title = #{title},
 				body = #{body},
 				writer = #{writer}
-			WHERE id = #{id}
+			WHERE
+				id = #{id}
 			""")
 	int update(Board board);
 
-	
 	@Delete("""
 			DELETE FROM Board
 			WHERE id = #{id}
 			""")
-
 	int deleteById(Integer id);
 
 	@Insert("""
-			INSERT INTO Board(title, body, writer)
+			INSERT INTO Board (title, body, writer)
 			VALUES (#{title}, #{body}, #{writer})
 			""")
-	//자동 증가하는 키값을 사용하고 싶을 때
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	int insert(Board board);
 
-	
 	@Select("""
 			<script>
 			<bind name="pattern" value="'%' + search + '%'" />
 			SELECT
-				id,
-				title,
-				writer,
-				inserted
-			FROM Board
+				b.id,
+				b.title,
+				b.writer,
+				b.inserted,
+				COUNT(f.id) fileCount
+			FROM Board b LEFT JOIN FileName f ON b.id = f.boardId
 			
 			<where>
 				<if test="(type eq 'all') or (type eq 'title')">
@@ -81,7 +81,8 @@ public interface BoardMapper {
 				</if>
 			</where>
 			
-			ORDER BY id DESC
+			GROUP BY b.id
+			ORDER BY b.id DESC
 			LIMIT #{startIndex}, #{rowPerPage}
 			</script>
 			""")
@@ -118,5 +119,6 @@ public interface BoardMapper {
 			VALUES (#{boardId}, #{fileName})
 			""")
 	Integer insertFileName(Integer boardId, String fileName);
+	
 	
 }
