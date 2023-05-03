@@ -28,10 +28,11 @@
 					<!-- 그림 파일 출력 -->
 					<div class="mb-3">
 						<c:forEach items="${board.fileName }" var="fileName">
-							<div>
+							<div class="mb-3">
 								<!-- localhost:8080/image/게시물번호/fileName -->
 								<!-- http://localhost:8080/image/412/%EB%AA%85%ED%97%8C.jpg -->
-								<img src="http://localhost:8080/image/${board.id }/${fileName}" class="img-thumbnail" class="img-fluid" alt="" />
+								<c:set var="bucketUrl" value="https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/board" />
+ 								<img src="${bucketUrl }/${board.id }/${fileName}" class="img-thumbnail" class="img-fluid" alt="" />
 							</div>
 						</c:forEach>
 					</div>
