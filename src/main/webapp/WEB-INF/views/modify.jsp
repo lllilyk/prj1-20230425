@@ -36,6 +36,7 @@
 					<!-- 그림 파일 출력 -->
 					<div class="mb-3">
 						<!-- foreach 때문에 id가 한 페이지에서 여러번 반복되는 것을 막기위해서 varStatus사용 --> 
+						<!-- 한 id는 한 페이지에서 딱 한 번만 사용되어야 함 -->
 						<c:forEach items="${board.fileName }" var="fileName" varStatus="status"> 
 						<div class="mb-3">
 								<div class="row">

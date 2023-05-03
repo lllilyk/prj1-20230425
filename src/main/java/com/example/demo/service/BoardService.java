@@ -11,16 +11,25 @@ import org.springframework.web.multipart.*;
 import com.example.demo.domain.*;
 import com.example.demo.mapper.*;
 
+import software.amazon.awssdk.services.s3.*;
+
 // @Component
 @Service // Service 역할을 하는 Component라는 의미
 // 이왕이면 서비스 파일이니까 서비스로 명시적으로 어노테이션 달아주기
 @Transactional(rollbackFor = Exception.class)
 // class level에서 transactional 어노테이션을 붙여서 모든 exception 발생시 rollback되도록
 public class BoardService {
+	
+	@Autowired
+	private S3Client s3;
+	
+	@Value("${aws.s3.bucketName}")
+	private String bucketName;
+	
 	// controller가 service한테 일을 시키면
 	// service가 mapper한테 일을 시킴
 	// mapper가 일을 주입받아야함
-
+	
 	@Autowired
 	private BoardMapper mapper;
 
