@@ -52,7 +52,11 @@
 							<div class="col-10">
 								<!-- localhost:8080/image/게시물번호/fileName -->
 								<!-- http://localhost:8080/image/412/%EB%AA%85%ED%97%8C.jpg -->
+								<!-- 하드디스크에서 사진을 불러올 때 사용한 코드
 								<img src="http://localhost:8080/image/${board.id }/${fileName}" class="img-thumbnail img-fluid" alt="" />
+								 -->
+								 <!-- 이제 s3로 연결해서 사진을 불러오니까 아래 두 줄의 코드 사용 -->
+ 								<img src="${bucketUrl }/${board.id }/${fileName}" class="img-thumbnail" class="img-fluid" alt="" />
 							</div>
 						</c:forEach>
 					</div>
@@ -74,6 +78,9 @@
 					<div class="mb-3">
 						<label for="fileInput" class="form-label">그림 파일</label>
 						<input class="form-control" type="file" id="fileInput" name="files" accept="image/*" multiple>
+						<div class="form-text">
+							총 10MB, 하나의 파일은 1MB를 초과할 수 없습니다.
+						</div>
 					</div>
 					
 					
