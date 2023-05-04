@@ -17,7 +17,7 @@
 
 	<!-- 18번째 줄의 코드는 아래의 코드로 보여지는 모든 것들이 화면의 중앙에 오도록 하기 위해서 작성 -->
 	<div class="container-lg">
-		<h1>♥게시물 목록♥</h1>
+		<h1><i class="fa-solid fa-list" style="color: #657be6;"></i>  게시물 목록</h1>
 		<!-- table.table>thead>tr>th*4^^tbody -->
 		<table class="table">
 			<thead>

@@ -18,7 +18,7 @@
 		<!-- .row.justify-content-center>.col-12.col-md-8.col-lg-6 -->
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 col-lg-6">
-				<h1>${board.id }번게시물</h1>
+				<h1><i class="fa-solid fa-quote-left" style="color: #657be6;"></i> ${board.id }번 게시물 <i class="fa-solid fa-quote-right" style="color: #657be6;"></i></h1>
 				<div>
 					<div class="mb-3">
 						<label for="" class="form-label">제목</label>

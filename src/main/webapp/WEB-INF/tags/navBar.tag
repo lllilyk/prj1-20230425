@@ -13,13 +13,12 @@
  -->
 
 <!-- navbar와 리스트 사이의 간격 조정(mb-3) -->
-<nav class="navbar navbar-expand-lg bg-dark mb-3" data-bs-theme="dark">
+<!-- <nav class="navbar navbar-expand-lg bg-dark mb-3" data-bs-theme="dark"> -->
+	<nav class="navbar navbar-expand-lg  mb-3" style="background-color: #e3f2fd;">
 	<!--  <div class="container-fluid"> navbar가 적당한 위치에 오도록 아래와 같이 수정-->
 	<div class="container-lg">
 		<a class="navbar-brand" href="/list">
-			<img src="/img/spring-logo.png" alt="" height="30">
-			board
-			</img>
+			<img src="/img/hangyodong.png" alt="" height="70"></img>
 		</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -29,16 +28,20 @@
 				<!-- 필요없는 코드들도 생략 -->
 				<!-- 2번째줄의 코드와 맞춰서 29-30코드 작성 -->
 				<li class="nav-item">
-					<a class="nav-link ${current eq 'list' ? 'active' : ''} " href="/list">목록</a>
+					<!-- 목록 -->
+					<a class="nav-link ${current eq 'list' ? 'active' : ''} " href="/list"><i class="fa-solid fa-list fa-xl" style="color: #657be6;"></i></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link ${current eq 'add' ? 'active' : ''} " href="/add">글작성</a>
+					<!-- 글작성 -->
+					<a class="nav-link ${current eq 'add' ? 'active' : ''} " href="/add"><i class="fa-regular fa-pen-to-square fa-xl" style="color: #657be6;"></i></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link ${current eq 'signup' ? 'active' : ''} " href="/member/signup">회원가입</a>
+					<!-- 회원가입 -->
+					<a class="nav-link ${current eq 'signup' ? 'active' : ''} " href="/member/signup"><i class="fa-solid fa-user-plus fa-xl" style="color: #657be6;"></i></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link ${current eq 'memberList' ? 'active' : ''} " href="/member/list">회원목록</a>
+					<!-- 회원목록 -->
+					<a class="nav-link ${current eq 'memberList' ? 'active' : ''} " href="/member/list"><i class="fa-solid fa-user-group fa-xl" style="color: #657be6;"></i></a>
 				</li>
 
 			</ul>
@@ -65,7 +68,7 @@
 					</select>
 
 					<input value="${param.search }" name="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">
+					<button class="btn btn-outline-info" type="submit">
 						<i class="fa-solid fa-magnifying-glass"></i>
 					</button>
 				</div>

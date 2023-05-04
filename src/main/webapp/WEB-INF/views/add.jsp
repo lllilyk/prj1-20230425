@@ -16,7 +16,7 @@
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 col-lg-6">
-				<h1>게시물 작성</h1>
+				<h1><i class="fa-regular fa-pen-to-square" style="color: #657be6;"></i> 게시물 작성</h1>
 				<form method="post" enctype="multipart/form-data">
 					<!-- id는 기본값, inserted는 현재시간이 들어가니까 필요없음 -->
 					<div class="mb-3">

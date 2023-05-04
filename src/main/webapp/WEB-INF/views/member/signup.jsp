@@ -18,7 +18,7 @@
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 col-lg-6">
-				<h1>회원 가입</h1>
+				<h1><i class="fa-solid fa-user-plus" style="color: #657be6;"></i> 회원 가입</h1>
 				<form method="post">
 					<!-- .mb-3*5>(label.form-label[for]+input.form-control[name]) -->
 					<div class="mb-3">
