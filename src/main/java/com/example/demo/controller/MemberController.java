@@ -43,13 +43,11 @@ public class MemberController {
 		model.addAttribute("memberList", list);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// 경로 : /member/info?id=aa
+	@GetMapping("info")
+	//public void info(@RequestParam("id") String id) {
+	public void info(String id, Model model) {
+		Member member = service.get(id);
+		model.addAttribute("member", member);
+	}
 }
