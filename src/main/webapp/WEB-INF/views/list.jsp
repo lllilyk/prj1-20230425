@@ -35,7 +35,7 @@
 						<td>
 							<!-- path variable --> <a href="/id/${board.id }">${board.title }</a>
 							<c:if test="${board.fileCount > 0 }">
-								<span class="badge rounded-pill text-bg-dark">
+								<span class="badge rounded-pill text-bg-light">
 									<i class="fa-regular fa-images"></i>
 										${board.fileCount }
 								</span>
@@ -74,9 +74,7 @@
 						<my:pageItem pageNum="${pageInfo.currentPageNum + 1 }">
 							<i class="fa-solid fa-angle-right"></i>
 						</my:pageItem>
-					
 					</c:if>
-
 				</ul>
 			</nav>
 		</div>
