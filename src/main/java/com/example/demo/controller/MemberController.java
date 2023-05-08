@@ -50,4 +50,43 @@ public class MemberController {
 		Member member = service.get(id);
 		model.addAttribute("member", member);
 	}
+	
+	@PostMapping("remove")
+	public String remove(Member member, RedirectAttributes rttr) {
+		
+		boolean ok = service.remove(member);
+		
+		if (ok) {
+			rttr.addFlashAttribute("message", "회원 탈퇴하였습니다.");
+			return "redirect:/list";
+		} else {
+			rttr.addFlashAttribute("message", "회원 탈퇴시 문제가 발생하였습니다.");
+			return "redirect:/member/info?id=" + member.getId(); 
+		}
+	}
+	
+	// 1.
+	@GetMapping("modify")
+	public void modifyForm(String id, Model model) {
+		Member member = service.get(id);
+		model.addAttribute("member", member);
+//		model.addAttribute(service.get(id));
+		
+	}
+	
+	
+	// 2.
+	@PostMapping("modify")
+	public String modifyProcess(Member member, String oldPassword, RedirectAttributes rttr) {
+		boolean ok = service.modify(member, oldPassword);
+		
+		if (ok) {
+			rttr.addFlashAttribute("message", "회원 정보가 수정되었습니다.");
+			return "redirect:/member/info?id=" + member.getId();
+		} else {
+			rttr.addFlashAttribute("message", "회원 정보 수정시 문제가 발생하였습니다.");
+			return "redirect:/member/modify?id=" + member.getId();
+		}
+		
+	}
 }
