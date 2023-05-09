@@ -1,6 +1,7 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ attribute name="current"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!-- navbar를 bootstrap의 도움을 받아 아래에서 작성했으니 이제 필요 없음
 <div>
 	<div>
@@ -14,7 +15,7 @@
 
 <!-- navbar와 리스트 사이의 간격 조정(mb-3) -->
 <!-- <nav class="navbar navbar-expand-lg bg-dark mb-3" data-bs-theme="dark"> -->
-	<nav class="navbar navbar-expand-lg  mb-3" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-expand-lg  mb-3" style="background-color: #e3f2fd;">
 	<!--  <div class="container-fluid"> navbar가 적당한 위치에 오도록 아래와 같이 수정-->
 	<div class="container-lg">
 		<a class="navbar-brand" href="/list">
@@ -29,21 +30,50 @@
 				<!-- 2번째줄의 코드와 맞춰서 29-30코드 작성 -->
 				<li class="nav-item">
 					<!-- 목록 -->
-					<a class="nav-link ${current eq 'list' ? 'active' : ''} " href="/list"><i class="fa-solid fa-list fa-xl" style="color: #657be6;"></i></a>
+					<a class="nav-link ${current eq 'list' ? 'active' : ''} " href="/list">
+						<i class="fa-solid fa-list fa-xl" style="color: #657be6;"></i>
+					</a>
 				</li>
+				<sec:authorize access="isAuthenticated()">
 				<li class="nav-item">
 					<!-- 글작성 -->
-					<a class="nav-link ${current eq 'add' ? 'active' : ''} " href="/add"><i class="fa-regular fa-pen-to-square fa-xl" style="color: #657be6;"></i></a>
+					<a class="nav-link ${current eq 'add' ? 'active' : ''} " href="/add">
+						<i class="fa-regular fa-pen-to-square fa-xl" style="color: #657be6;"></i>
+					</a>
 				</li>
+				</sec:authorize>
+				<sec:authorize access="isAnonymous()">
 				<li class="nav-item">
 					<!-- 회원가입 -->
-					<a class="nav-link ${current eq 'signup' ? 'active' : ''} " href="/member/signup"><i class="fa-solid fa-user-plus fa-xl" style="color: #657be6;"></i></a>
+					<a class="nav-link ${current eq 'signup' ? 'active' : ''} " href="/member/signup">
+						<i class="fa-solid fa-user-plus fa-xl" style="color: #657be6;"></i>
+					</a>
 				</li>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+					<li class="nav-item">
+						<!-- 회원목록 -->
+						<a class="nav-link ${current eq 'memberList' ? 'active' : ''} " href="/member/list">
+							<i class="fa-solid fa-user-group fa-xl" style="color: #657be6;"></i>
+						</a>
+					</li>
+				</sec:authorize>
+				<sec:authorize access="isAnonymous()">
 				<li class="nav-item">
-					<!-- 회원목록 -->
-					<a class="nav-link ${current eq 'memberList' ? 'active' : ''} " href="/member/list"><i class="fa-solid fa-user-group fa-xl" style="color: #657be6;"></i></a>
+					<!-- 로그인 -->
+					<a class="nav-link ${current eq 'login' ? 'active' : ''} " href="/member/login">
+						<i class="fa-solid fa-right-to-bracket fa-xl" style="color: #657be6;"></i>
+					</a>
 				</li>
-
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+					<li class="nav-item">
+						<!-- 로그아웃 -->
+						<a class="nav-link" href="/member/logout">
+							<i class="fa-solid fa-right-from-bracket fa-xl" style="color: #657be6;"></i>
+						</a>
+					</li>
+				</sec:authorize>
 			</ul>
 
 			<!-- 링크 두 개밖에 없으니까 아래는 다 필요가 없음
@@ -76,3 +106,39 @@
 		</div>
 	</div>
 </nav>
+
+<div>
+	<sec:authentication property="principal" />
+</div>
+
+<!-- https://docs.spring.io/spring-security/reference/servlet/authorization/expression-based.html -->
+<!-- 연습용
+
+<div>
+	<sec:authorize access="isAuthenticated()" var="loggedIn">
+		로그인한 상태
+	</sec:authorize>
+</div>
+
+<div>
+	<sec:authorize access="isAnonymous()">
+		로그아웃한 상태
+	</sec:authorize>
+</div>
+
+<div>
+	<sec:authorize access="${loggedIn}">
+		또 로그인한 상태
+	</sec:authorize>
+</div>
+
+-->
+
+
+
+
+
+
+
+
+
