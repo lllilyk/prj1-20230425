@@ -85,7 +85,6 @@
 						</div>
 					</div>
 					
-					
 					<div class="mb-3">
 						<input class="btn btn-secondary" type="submit" value="수정" />
 					</div>

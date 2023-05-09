@@ -74,7 +74,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/modify/{id}")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkBoardWriter(authentication, #id)")
 	public String modifyForm(@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("board", service.getBoard(id));
 		return "modify";
@@ -83,7 +83,10 @@ public class BoardController {
 
 	//@RequestMapping(value="/modify/{id}", method=RequestMethod.POST)
 	@PostMapping("/modify/{id}")
-	@PreAuthorize("isAuthenticated()")
+	// 내 아이디로 내가 쓴 글은 정상적으로 수정되고, 남이 쓴 글은 수정하겠다는 요청이 denied되도록!
+	// @Springbeanname.methodname(authentication, 작성자id)
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkBoardWriter(authentication, #board.id)")
+	//수정하려는 게시물의 id : board.getId
 	public String modifyProcess(Board board, 
 			@RequestParam(value="files", required = false) MultipartFile[] addFiles,
 			@RequestParam(value = "removeFiles", required = false) List<String> removeFileNames,
@@ -108,7 +111,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("remove")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkBoardWriter(authentication, #id)")
 	public String remove(@RequestParam Integer id, RedirectAttributes rttr) {
 		boolean ok = service.remove(id);
 		if(ok) {
