@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,11 +29,14 @@
 						<label for="bodyTextarea" class="form-label">본문</label>
 						<textarea rows="10" id="bodyTextarea" class="form-control" name="body">${board.body }</textarea>
 					</div>
+					
+					<!-- 어차피 로그인한 상태이기 때문에 작성자가 누구인지 얻을 필요가없음 
 					<div class="mb-3">
 						<label for="writerInput" class="form-label">작성자</label>
-						<input id="writerInput" class="form-control" type="text" name="writer" value="${board.writer }" />
+						<input id="writerInput" class="form-control" type="text" name="writer" value="<sec:authentication property="name" />" readonly />
 					</div>
-
+					 -->
+					
 					<div class="mb-3">
 						<label for="fileInput" class="form-label">그림 파일</label>
 						<input class="form-control" type="file" id="fileInput" name="files" accept="image/*" multiple>
