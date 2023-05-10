@@ -57,8 +57,9 @@ public class MemberController {
 	
 	// 경로 : /member/info?id=aa
 	@GetMapping("info")
-	//회원 정보는 로그인한 id와 동일한 사람것만 볼 수 있도록
-	@PreAuthorize("isAuthenticated() and (authentication.name eq #id) and hasAuthority('admin')")
+	// 회원 정보는 로그인한 id와 동일한 사람것만 볼 수 있도록
+	// and가 or보다 우선순위가 높으므로 괄호()는 편의를 위해서 붙이는 것일 뿐
+	@PreAuthorize("hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #id))")
 	//public void info(@RequestParam("id") String id) {
 	public void info(String id, Model model) {
 		Member member = service.get(id);
@@ -100,7 +101,7 @@ public class MemberController {
 	// 2.
 	@PostMapping("modify")
 	//로그인한 id와 동일한 경우에만 수정이 가능하도록
-	@PreAuthorize("isAuthenticated() and (authentication.name eq #id)")
+	@PreAuthorize("isAuthenticated() and (authentication.name eq #member.id)")
 	public String modifyProcess(Member member, String oldPassword, RedirectAttributes rttr) {
 		boolean ok = service.modify(member, oldPassword);
 		
@@ -112,6 +113,4 @@ public class MemberController {
 			return "redirect:/member/modify?id=" + member.getId();
 		}
 	}
-	
-	
 }

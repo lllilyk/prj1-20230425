@@ -60,7 +60,7 @@
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 				<li class="nav-item">
-					<!-- 마이페이지 -->
+					<!-- 회원정보 -->
 					<a class="nav-link ${current eq 'memberInfo' ? 'active' : ''} " href="/member/info?id=<sec:authentication property="name" />">
 						<i class="fa-solid fa-circle-user fa-xl" style="color: #657be6;"></i>
 					</a>
