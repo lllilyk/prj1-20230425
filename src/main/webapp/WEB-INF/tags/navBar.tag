@@ -115,9 +115,11 @@
 	</div>
 </nav>
 
+<!-- 로그인 상태를 확인하려고 썼던 코드 
 <div>
 	<sec:authentication property="principal" />
 </div>
+-->
 
 <!-- https://docs.spring.io/spring-security/reference/servlet/authorization/expression-based.html -->
 <!-- 연습용
@@ -141,12 +143,3 @@
 </div>
 
 -->
-
-
-
-
-
-
-
-
-
