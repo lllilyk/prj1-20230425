@@ -49,7 +49,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("list")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('admin')")
 	public void list(Model model) {
 		List<Member> list = service.listMember();
 		model.addAttribute("memberList", list);
@@ -58,7 +58,7 @@ public class MemberController {
 	// 경로 : /member/info?id=aa
 	@GetMapping("info")
 	//회원 정보는 로그인한 id와 동일한 사람것만 볼 수 있도록
-	@PreAuthorize("isAuthenticated() and (authentication.name eq #id)")
+	@PreAuthorize("isAuthenticated() and (authentication.name eq #id) and hasAuthority('admin')")
 	//public void info(@RequestParam("id") String id) {
 	public void info(String id, Model model) {
 		Member member = service.get(id);
