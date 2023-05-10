@@ -12,14 +12,14 @@
 </head>
 <body>
 
-	<my:navBar></my:navBar>
+	<my:navBar current="memberInfo"></my:navBar>
 
 	<my:alert></my:alert>
 
 	<div class="container-lg">
 		<div class="row justify-content-center">
-			<div class="col-12 col-md-8 col-lg-6">
-				<h1><i class="fa-solid fa-user" style="color: #657be6;"></i> 회원 정보</h1>
+			<div class="col-12 col-md-8 col-lg-6"> 
+				<h1><i class="fa-solid fa-circle-user" style="color: #657be6;"></i> 마이 페이지</h1>
 				<!-- .mb-3*4>label+input -->
 				<div class="mb-3">
 					<label class="form-label" for="">아이디</label>
