@@ -12,6 +12,8 @@ import org.springframework.web.servlet.mvc.support.*;
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
 
+import jakarta.servlet.http.*;
+
 @Controller
 @RequestMapping("member")
 public class MemberController {
@@ -55,8 +57,8 @@ public class MemberController {
 	
 	// 경로 : /member/info?id=aa
 	@GetMapping("info")
-	//회원 정보는 로그인한 사람만 볼 수 있도록
-	@PreAuthorize("isAuthenticated()")
+	//회원 정보는 로그인한 id와 동일한 사람것만 볼 수 있도록
+	@PreAuthorize("isAuthenticated() and (authentication.name eq #id)")
 	//public void info(@RequestParam("id") String id) {
 	public void info(String id, Model model) {
 		Member member = service.get(id);
@@ -64,14 +66,20 @@ public class MemberController {
 	}
 	
 	@PostMapping("remove")
-	//로그인한 사람만 삭제할 수 있도록
-	@PreAuthorize("isAuthenticated()")
-	public String remove(Member member, RedirectAttributes rttr) {
+	//member 테이블의 id와 로그인한 id가 같은 사람만 탈퇴할 수 있도록
+	@PreAuthorize("isAuthenticated() and (authentication.name eq #member.id)")
+	public String remove(Member member, 
+						 RedirectAttributes rttr,
+						 HttpServletRequest request) throws Exception {
 		
 		boolean ok = service.remove(member);
 		
 		if (ok) {
 			rttr.addFlashAttribute("message", "회원 탈퇴하였습니다.");
+			
+			// 탈퇴하면 바로 로그아웃되도록
+			request.logout();
+			
 			return "redirect:/list";
 		} else {
 			rttr.addFlashAttribute("message", "회원 탈퇴시 문제가 발생하였습니다.");
@@ -81,19 +89,18 @@ public class MemberController {
 	
 	// 1.
 	@GetMapping("modify")
-	//로그인한 사람만 수정할 수 있도록
-	@PreAuthorize("isAuthenticated()")
+	//로그인한 id와 동일한 경우에만 수정이 가능하도록
+	@PreAuthorize("isAuthenticated() and (authentication.name eq #id)")
 	public void modifyForm(String id, Model model) {
 		Member member = service.get(id);
 		model.addAttribute("member", member);
 //		model.addAttribute(service.get(id));
 		
 	}
-	
-	
 	// 2.
 	@PostMapping("modify")
-	@PreAuthorize("isAuthenticated()")
+	//로그인한 id와 동일한 경우에만 수정이 가능하도록
+	@PreAuthorize("isAuthenticated() and (authentication.name eq #id)")
 	public String modifyProcess(Member member, String oldPassword, RedirectAttributes rttr) {
 		boolean ok = service.modify(member, oldPassword);
 		
@@ -104,7 +111,6 @@ public class MemberController {
 			rttr.addFlashAttribute("message", "회원 정보 수정시 문제가 발생하였습니다.");
 			return "redirect:/member/modify?id=" + member.getId();
 		}
-		
 	}
 	
 	
