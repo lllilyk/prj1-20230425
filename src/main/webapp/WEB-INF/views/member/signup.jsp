@@ -12,18 +12,21 @@
 </head>
 <body>
 	<my:navBar current="signup"></my:navBar>
-	
+
 	<my:alert></my:alert>
-	
+
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 col-lg-6">
-				<h1><i class="fa-solid fa-user-plus" style="color: #657be6;"></i> 회원 가입</h1>
+				<h1>
+					<i class="fa-solid fa-user-plus" style="color: #657be6;"></i>
+					회원 가입
+				</h1>
 				<form method="post">
 					<!-- .mb-3*5>(label.form-label[for]+input.form-control[name]) -->
 					<div class="mb-3">
 						<label for="inputId" class="form-label">아이디</label>
-						<input id="inputId" type="text" class="form-control" name="id"  value="${member.id }"/>
+						<input id="inputId" type="text" class="form-control" name="id" value="${member.id }" />
 					</div>
 					<div class="mb-3">
 						<label for="inputPassword" class="form-label">패스워드</label>
@@ -32,17 +35,17 @@
 					<div class="mb-3">
 						<label for="inputPasswordCheck" class="form-label">패스워드 확인</label>
 						<input id="inputPasswordCheck" type="password" class="form-control" />
-						
+
 						<!-- 처음에는 보일 필요가 없으니까 display-none을 주는 class사용 -->
 						<div id="passwordSuccessText" class="d-none form-text text-primary">
 							<i class="fa-solid fa-circle-check"></i>
-							패스워드가 일치합니다. 		
+							패스워드가 일치합니다.
 						</div>
 						<div id="passwordFailText" class="d-none form-text text-danger">
-							<i class="fa-solid fa-triangle-exclamation" ></i>
-							패스워드가 일치하지 않습니다. 
+							<i class="fa-solid fa-triangle-exclamation"></i>
+							패스워드가 일치하지 않습니다.
 						</div>
-						
+
 					</div>
 					<div class="mb-3">
 						<label for="inputNickName" class="form-label">별명</label>
@@ -63,9 +66,10 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+		<script src="/js/member/signup.js"></script>
+		<!-- 아래의 코드를 위의 파일로 만들어서 해당 폴더에 넣을 것임 -->
+		<!-- 
 	<script>
-		console.log("hello js");
-		
 		// 패스워드, 패스워드 체크 인풋에 키업 이벤트 발생하면
 		$("#inputPassword, #inputPasswordCheck").keyup(function(){
 			// 패스워드에 입력한 값
@@ -90,9 +94,7 @@
 				$("#passwordFailText").removeClass("d-none");
 			}
 		})
-		
-		
 	</script>
-
+ -->
 </body>
 </html>
