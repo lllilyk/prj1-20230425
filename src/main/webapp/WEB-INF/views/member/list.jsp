@@ -16,7 +16,7 @@
 
 	<div class="container-lg">
 		<div class="row justify-content-center">
-			<div class="col-12 col-md-8 col-lg-6">
+			<div class="col-12">
 				<h1><i class="fa-solid fa-user-group" style="color: #657be6;"></i> 회원 목록</h1>
 				<!-- table.table>thead>tr>th*5^^tbody -->
 				<table class="table">
