@@ -20,7 +20,28 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;
+	
+	//{id}는 pathvariable
+	@GetMapping("checkId/{id}")
+	@ResponseBody
+//	응답하는 것이 json형식이어야 하니까 responsebody 붙여주기
+	public Map<String, Object> checkId(@PathVariable("id") String id){
+		return service.checkId(id);
+	}
 
+	@GetMapping("checkNickName/{nickName}")
+	@ResponseBody
+//	응답하는 것이 json형식이어야 하니까 responsebody 붙여주기
+	public Map<String, Object> checkNickName(@PathVariable("nickName") String nickName) {
+		return service.checkNickName(nickName);
+	}
+	
+	@GetMapping("checkEmail/{email}")
+	@ResponseBody
+	public Map<String, Object> checkEmail(@PathVariable("email") String email) {
+		return service.checkEmail(email);
+	}
+	
 	@GetMapping("signup")
 	//get방식으로 signup 경로로 들어가는 경우에는 login이 안 되어있는 경우에만 가능하도록!
 	@PreAuthorize("isAnonymous()")
