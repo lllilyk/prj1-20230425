@@ -30,11 +30,15 @@
 							<input id="inputId" type="text" class="form-control" name="id" value="${member.id }" />
 							<button class="btn btn-outline-info" type="button" id="checkIdBtn">중복확인</button>
 						</div>
-						
-						<div class="d-none form-text text-primary" id="availableIdMessage" >
-						<i class="fa-solid fa-circle-check"></i>사용가능한 ID입니다.</div>
+
+						<div class="d-none form-text text-primary" id="availableIdMessage">
+							<i class="fa-solid fa-circle-check"></i>
+							사용가능한 ID입니다.
+						</div>
 						<div class="d-none form-text text-danger" id="notAvailableIdMessage">
-						<i class="fa-solid fa-triangle-exclamation"></i>사용 불가능한 ID입니다.</div>
+							<i class="fa-solid fa-triangle-exclamation"></i>
+							사용 불가능한 ID입니다.
+						</div>
 
 						<!-- button#checkIdBtn -->
 						<!-- bootstrap 툴을 사용해서 위에서 작성했으므로 이제 더이상 필요없어짐 -->
@@ -83,15 +87,19 @@
 							<input id="inputEmail" type="email" class="form-control" name="email" value="${member.email }" />
 							<button class="btn btn-outline-info" type="button" id="checkEmailBtn">중복확인</button>
 						</div>
-						
+
 						<div class="d-none form-text text-primary" id="availableEmailMessage">
-						<i class="fa-solid fa-circle-check"></i>사용 가능한 이메일입니다.</div>
+							<i class="fa-solid fa-circle-check"></i>
+							사용 가능한 이메일입니다.
+						</div>
 						<div class="d-none form-text text-danger" id="notAvailableEmailMessage">
-						<i class="fa-solid fa-triangle-exclamation"></i>사용 불가능한 이메일입니다.</div>
+							<i class="fa-solid fa-triangle-exclamation"></i>
+							사용 불가능한 이메일입니다.
+						</div>
 					</div>
 					<div class="mb-3">
-					<!-- class로 disabled를 주면 enter만 치면 값이 다 전송되어버리는데 -->
-					<!-- attribute로 disable을 주면 enter를 쳐도 값이 전송되지 않는다 -->
+						<!-- class로 disabled를 주면 enter만 치면 값이 다 전송되어버리는데 -->
+						<!-- attribute로 disable을 주면 enter를 쳐도 값이 전송되지 않는다 -->
 						<input id="signupSubmit" type="submit" class="btn btn-primary" disabled value="가입" />
 					</div>
 				</form>
@@ -103,6 +111,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 		<script src="/js/member/signup.js"></script>
+		
 		<!-- 아래의 코드를 위의 파일로 만들어서 해당 폴더에 넣을 것임 -->
 		<!-- 
 	<script>

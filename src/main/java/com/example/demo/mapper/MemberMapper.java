@@ -54,7 +54,6 @@ public interface MemberMapper {
 			""")
 	Integer update(Member member);
 
-	
 	@Select("""
 			SELECT *
 			FROM Member

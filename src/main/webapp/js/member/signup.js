@@ -22,28 +22,6 @@ $("#inputEmail").keyup(function(){
 	enableSubmit();
 });
 
-// input 닉네임에 키보드 입력 발생시
-$("#inputNickName").keyup(function(){
-	// 닉네임 중복 확인 다시 
-	checkNickName = false;
-	$("#availableNickNameMessage").addClass("d-none")
-	$("#notAvailableNickNameMessage").removeClass("d-none")
-	
-	// submit 버튼 비활성화 
-	enableSubmit();
-});
-
-// input 아이디에 키보드 입력 발생시
-$("#inputId").keyup(function(){
-	// 아이디 중복 확인 다시 
-	checkId = false;
-	$("#availableIdMessage").addClass("d-none")
-	$("#notAvailableIdMessage").removeClass("d-none")
-	
-	// submit 버튼 비활성화 
-	enableSubmit();
-});
-
 // 이메일 중복확인 버튼이 클릭되면
 $("#checkEmailBtn").click(function() {
 	const email = $("#inputEmail").val();
@@ -63,6 +41,17 @@ $("#checkEmailBtn").click(function() {
 		//complete는 success거나 fail이거나 상관없이 실행됨
 		complete: enableSubmit
 	});
+});
+
+// input 닉네임에 키보드 입력 발생시
+$("#inputNickName").keyup(function(){
+	// 닉네임 중복 확인 다시 
+	checkNickName = false;
+	$("#availableNickNameMessage").addClass("d-none")
+	$("#notAvailableNickNameMessage").removeClass("d-none")
+	
+	// submit 버튼 비활성화 
+	enableSubmit();
 });
 
 // 별명 중복확인 버튼이 클릭되면
@@ -85,6 +74,17 @@ $("#checkNickNameBtn").click(function() {
 		},
 		complete: enableSubmit
 	});
+});
+
+// input 아이디에 키보드 입력 발생시
+$("#inputId").keyup(function(){
+	// 아이디 중복 확인 다시 
+	checkId = false;
+	$("#availableIdMessage").addClass("d-none")
+	$("#notAvailableIdMessage").removeClass("d-none")
+	
+	// submit 버튼 비활성화 
+	enableSubmit();
 });
 
 // id 중복확인 버튼이 클릭되면
