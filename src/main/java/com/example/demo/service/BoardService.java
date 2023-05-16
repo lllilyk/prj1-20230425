@@ -44,8 +44,19 @@ public class BoardService {
 		return list;
 	}
 
-	public Board getBoard(Integer id) {
-		return mapper.selectById(id);
+	public Board getBoard(Integer id, Authentication authentication) {
+		Board board = mapper.selectById(id);
+
+		
+		// 현재 로그인한 사람이 이 게시물에 좋아요 했는지?
+		if (authentication != null) {
+			Like like = likeMapper.select(id, authentication.getName());
+			if (like != null) {
+				board.setLiked(true);
+			}
+		}
+		
+		return board;
 	}
 
 	public boolean modify(Board board, MultipartFile[] addFiles, List<String> removeFileNames) throws Exception {
@@ -266,5 +277,10 @@ public class BoardService {
 		Integer count = likeMapper.countByBoardId(like.getBoardId());
 		result.put("count", count);
 		return result;
+	}
+
+	public Board getBoard(Integer id) {
+
+		return getBoard(id, null);
 	}
 }

@@ -63,11 +63,13 @@ public class BoardController {
 	}
 	
 	@GetMapping("/id/{id}")
-	public String board(@PathVariable("id") Integer id, Model model) {
+	public String board(@PathVariable("id") Integer id, 
+						Model model,
+						Authentication authentication) {
 		// 1. request param 
 		// 2. business logic : 서비스한테 일 시킴
-		Board board = service.getBoard(id);
-		System.out.println(board);
+		Board board = service.getBoard(id, authentication);
+		//System.out.println(board);
 		// 3. add attribute
 		model.addAttribute("board", board);
 		// 4. forward / redirect
@@ -76,7 +78,8 @@ public class BoardController {
 	
 	@GetMapping("/modify/{id}")
 	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkBoardWriter(authentication, #id)")
-	public String modifyForm(@PathVariable("id") Integer id, Model model) {
+	public String modifyForm(
+			@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("board", service.getBoard(id));
 		return "modify";
 		
