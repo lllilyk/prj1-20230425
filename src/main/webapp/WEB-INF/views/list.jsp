@@ -23,6 +23,7 @@
 			<thead>
 				<tr>
 					<th scope="col">#</th>
+					<th scope="col"><i class="fa-brands fa-gratipay"></i></th>
 					<th scope="col">TITLE</th>
 					<th scope="col">WRITER</th>
 					<th scope="col">INSERTED</th>
@@ -32,6 +33,7 @@
 				<c:forEach items="${boardList}" var="board">
 					<tr>
 						<td>${board.id }</td>
+						<td>${board.likeCount }</td>
 						<td>
 							<!-- path variable --> <a href="/id/${board.id }">${board.title }</a>
 							<c:if test="${board.fileCount > 0 }">

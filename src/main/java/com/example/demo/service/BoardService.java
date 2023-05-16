@@ -263,6 +263,8 @@ public class BoardService {
 			Integer insertCnt = likeMapper.insert(like);
 			result.put("like", true);
 		}
+		Integer count = likeMapper.countByBoardId(like.getBoardId());
+		result.put("count", count);
 		return result;
 	}
 }
