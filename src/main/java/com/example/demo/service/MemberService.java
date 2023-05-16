@@ -19,6 +19,9 @@ public class MemberService {
 	private MemberMapper mapper;
 
 	@Autowired
+	private BoardLikeMapper likeMapper;
+	
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
@@ -42,7 +45,7 @@ public class MemberService {
 
 		return mapper.selectById(id);
 	}
-
+	
 	public boolean remove(Member member) {
 		Member oldMember = mapper.selectById(member.getId());
 		int cnt = 0;
@@ -53,8 +56,12 @@ public class MemberService {
 			// 이 회원이 작성한 게시물 row 삭제
 			boardService.removeByWriter(member.getId());
 			
+			// 이 회원이 좋아요한 레코드 삭제
+			likeMapper.deleteByMemberId(member.getId());
+			
 			// 회원 테이블 삭제
 			cnt = mapper.deleteById(member.getId());
+			
 		}
 
 		return cnt == 1;
