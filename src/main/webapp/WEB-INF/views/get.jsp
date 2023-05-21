@@ -33,32 +33,26 @@
 				<div class="d-flex">
 					<div class="me-auto">
 						<h1>
-							<span id="boardIdText"> ${board.id } </span>
-							번게시물
+							<span id="boardIdText"> ${board.id } </span> 번게시물
 						</h1>
 					</div>
 
 					<div>
 
 						<h1>
-							<span id="likeIcon">
-								<c:if test="${board.liked }">
+							<span id="likeIcon"> <c:if test="${board.liked }">
 									<i class="fa-solid fa-heart"></i>
-								</c:if>
-
-								<c:if test="${not board.liked }">
+								</c:if> <c:if test="${not board.liked }">
 									<i class="fa-regular fa-heart"></i>
 								</c:if>
-							</span>
-							<span id="likeNumber"> ${board.likeCount } </span>
+							</span> <span id="likeNumber"> ${board.likeCount } </span>
 						</h1>
 					</div>
 				</div>
 
 				<div>
 					<div class="mb-3">
-						<label for="" class="form-label">제목</label>
-						<input type="text" class="form-control" value="${board.title }" readonly />
+						<label for="" class="form-label">제목</label> <input type="text" class="form-control" value="${board.title }" readonly />
 					</div>
 
 					<!-- 그림 파일 출력 -->
@@ -77,12 +71,10 @@
 						<textarea class="form-control" readonly rows="10">${board.body }</textarea>
 					</div>
 					<div class="mb-3">
-						<label for="" class="form-label">작성자</label>
-						<input type="text" class="form-control" value="${board.writer }" readonly />
+						<label for="" class="form-label">작성자</label> <input type="text" class="form-control" value="${board.writer }" readonly />
 					</div>
 					<div class="mb-3">
-						<label for="" class="form-label">작성일시</label>
-						<input type="text" readonly class="form-control" value="${board.inserted }" />
+						<label for="" class="form-label">작성일시</label> <input type="text" readonly class="form-control" value="${board.inserted }" />
 					</div>
 
 					<sec:authorize access="isAuthenticated()">
@@ -96,6 +88,29 @@
 							</div>
 						</c:if>
 					</sec:authorize>
+
+					<div id="commentContainer">
+
+						<div id="addCommentContainer">
+							<h6>입력</h6>
+							<textarea id="commentTextArea"></textarea>
+							<button id="sendCommentBtn">전송</button>
+						</div>
+						<div id="updateCommentContainer">
+							<h6>수정</h6>
+							<input type="hidden" id="commentUpdateIdInput" />
+							<textarea id="commentUpdateTextArea"></textarea>
+							<button id="updateCommentBtn">수정</button>
+						</div>
+
+
+						<div id="commentListContainer">
+							<div>댓글1 내용 : 누가 : 언제</div>
+							<div>댓글2 내용 : 누가 : 언제</div>
+							<div>댓글3 내용 : 누가 : 언제</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -132,7 +147,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 	<script src="/js/board/like.js"></script>
-
+	<script src="/js/board/comment.js"></script>
 
 
 	<!-- bootstrap의 modal을 사용함으로써 필요없어짐 
