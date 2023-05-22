@@ -34,8 +34,7 @@
 					<div class="me-auto">
 						<h1>
 							<!-- <span id="boardIdText"> <i class="fa-solid fa-quote-left" style="color: #657be6;"></i> ${board.id }번 게시물 <i class="fa-solid fa-quote-right" style="color: #657be6;"></i></span> -->
-							<span id="boardIdText"> ${board.id } </span>
-							 게시물
+							<div><i class="fa-solid fa-quote-left" style="color: #657be6;"></i> no.<span id="boardIdText"> ${board.id } </span><i class="fa-solid fa-quote-right" style="color: #657be6;"></i></div>
 						</h1>
 					</div>
 
