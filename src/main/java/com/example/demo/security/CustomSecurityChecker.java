@@ -9,17 +9,31 @@ import com.example.demo.mapper.*;
 
 @Component
 public class CustomSecurityChecker {
-
+	
 	@Autowired
-	private BoardMapper mapper;
+	private BoardMapper boardMapper;
 	
+	@Autowired
+	private CommentMapper commentMapper;
+	
+	public boolean checkCommentWriter(Authentication authentication,
+			Integer commentId) {
+		Comment comment = commentMapper.selectById(commentId);
+		
+		return comment.getMemberId().equals(authentication.getName());
+	}
+
 	public boolean checkBoardWriter(Authentication authentication, Integer boardId) {
-		Board board = mapper.selectById(boardId);
-	
+		Board board = boardMapper.selectById(boardId);
+		
 		String username = authentication.getName();
 		String writer = board.getWriter();
 		
 		return username.equals(writer);
 	}
-	
 }
+
+
+
+
+

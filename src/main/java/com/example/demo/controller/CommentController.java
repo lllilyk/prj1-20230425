@@ -22,6 +22,7 @@ public class CommentController {
 	
 	@PutMapping("update")
 	@ResponseBody
+	@PreAuthorize("authenticated and @customSecurityChecker.checkCommentWriter(authentication, #comment.id)")
 	public ResponseEntity<Map<String, Object>> update(@RequestBody Comment comment) {
 		Map<String, Object> res = service.update(comment);
 		
@@ -37,6 +38,7 @@ public class CommentController {
 //	@RequestMapping(path = "id/{id}", method = RequestMethod.DELETE)
 	@DeleteMapping("id/{id}")
 	@ResponseBody
+	@PreAuthorize("authenticated and @customSecurityChecker.checkCommentWriter(authentication, #id)")
 	public ResponseEntity<Map<String, Object>> remove(@PathVariable("id") Integer id) {
 		Map<String, Object> res = service.remove(id);
 		
@@ -50,14 +52,15 @@ public class CommentController {
 			@RequestBody Comment comment,
 			Authentication authentication) {
 		
-		if(authentication == null) {
+		if (authentication == null) {
 			Map<String, Object> res = Map.of("message", "로그인 후 댓글을 작성해주세요.");
- 			return ResponseEntity.status(401).body(res);
-		} else {			
+			return ResponseEntity.status(401).body(res);
+		} else {
 			Map<String, Object> res = service.add(comment, authentication);
 			
 			return ResponseEntity.ok().body(res);
 		}
+		
 	}
 	
 	@GetMapping("list")
