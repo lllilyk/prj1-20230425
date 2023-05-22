@@ -44,10 +44,8 @@ function listComment() {
 			// console.log(data);
 			$("#commentListContainer").empty();
 			for (const comment of comments) {
-				// console.log(comment);
-				$("#commentListContainer").append(`
-					<div>
-						<button 
+				const editButtons = 
+					`<button 
 							id="commentDeleteBtn${comment.id}" 
 							class="commentDeleteButton" 
 							data-comment-id="${comment.id}">삭제</button>
@@ -55,7 +53,12 @@ function listComment() {
 						<button
 							id="commentUpdateBtn${comment.id}"
 							class="commentUpdateButton"
-							data-comment-id="${comment.id}">수정</button>
+							data-comment-id="${comment.id}">수정</button>`;
+				// console.log(comment);
+				$("#commentListContainer").append(`
+					<div>
+						
+						${comment.editable ? editButtons : ''}
 						: ${comment.content} 
 						: ${comment.memberId} 
 						: ${comment.inserted}

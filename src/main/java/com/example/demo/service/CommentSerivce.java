@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
@@ -16,13 +17,28 @@ public class CommentSerivce {
 	@Autowired
 	private CommentMapper mapper;
 
-	public List<Comment> list(Integer boardId) {
+	public List<Comment> list(Integer boardId, Authentication authentication) {
+		List<Comment> comments = mapper.selectAllByBoardId(boardId);
+		if(authentication != null) {
+//			stream 사용한 버전(어려운 버전)
+//			List<Comment> commentsWithEditable = 
+//					comments.stream()
+//							.map(c -> {
+//								c.setEditable(c.getMemberId().equals(authentication.getName()));
+//								return c;
+//							})
+//							.toList();
+			for (Comment comment : comments) {
+				comment.setEditable(comment.getMemberId().equals(authentication.getName()));
+			}
+		}
 		// TODO Auto-generated method stub
-		return mapper.selectAllByBoardId(boardId);
+		return comments;
 	}
 
-	public Map<String, Object> add(Comment comment) {
-		comment.setMemberId("user9");
+	public Map<String, Object> add(Comment comment, Authentication authentication) {
+		
+		comment.setMemberId(authentication.getName());
 		
 		var res = new HashMap<String, Object>();
 		

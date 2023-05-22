@@ -33,7 +33,7 @@
 				<div class="d-flex">
 					<div class="me-auto">
 						<h1>
-							<span id="boardIdText"> ${board.id } </span> 번게시물
+							<span id="boardIdText"> <i class="fa-solid fa-quote-left" style="color: #657be6;"></i> ${board.id }번 게시물 <i class="fa-solid fa-quote-right" style="color: #657be6;"></i></span> 
 						</h1>
 					</div>
 
@@ -90,20 +90,21 @@
 					</sec:authorize>
 
 					<div id="commentContainer">
-
+					<sec:authorize access="isAuthenticated()">
 						<div id="addCommentContainer">
 							<h6>입력</h6>
 							<textarea id="commentTextArea"></textarea>
 							<button id="sendCommentBtn">전송</button>
 						</div>
+					
 						<div id="updateCommentContainer">
 							<h6>수정</h6>
 							<input type="hidden" id="commentUpdateIdInput" />
 							<textarea id="commentUpdateTextArea"></textarea>
 							<button id="updateCommentBtn">수정</button>
 						</div>
-
-
+						</sec:authorize>
+						
 						<div id="commentListContainer">
 							<div>댓글1 내용 : 누가 : 언제</div>
 							<div>댓글2 내용 : 누가 : 언제</div>
