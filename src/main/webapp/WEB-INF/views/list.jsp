@@ -22,7 +22,7 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">#</th>
+					<th scope="col">No.</th>
 					<th scope="col"><i class="fa-brands fa-gratipay"></i></th>
 					<th scope="col">TITLE</th>
 					<th scope="col">WRITER</th>
